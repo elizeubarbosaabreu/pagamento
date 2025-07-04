@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagamento via PIX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .pix-code {
+            word-break: break-all;
+            background-color: #eee;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Pagamento via PIX</h1>
+        <p>Escaneie o QR Code abaixo ou copie o código:</p>
+        <div id="qrcode"><img src="qrcode-pix.png"</div>
+
+        <div class="pix-code" id="pix-code">
+00020126360014BR.GOV.BCB.PIX011404394425000183520400005303986540520.005802BR5924IG EV ASSEMBLEIA DE DEUS6014Pres Medici RO62180514CONFERENCIAEBD63040A72
+        </div>
+
+        <button onclick="copyPixCode()">Copiar Código PIX</button>
+    </div>
+
+    <script>
+        const pixCode = `00020126360014BR.GOV.BCB.PIX011404394425000183520400005303986540520.005802BR5924IG EV ASSEMBLEIA DE DEUS6014Pres Medici RO62180514CONFERENCIAEBD63040A72`;
+
+        // Gera o QR Code
+        QRCode.toCanvas(document.getElementById('qrcode'), pixCode, { width: 250 }, function (error) {
+            if (error) console.error(error);
+        });
+
+        // Copia o código PIX para a área de transferência
+        function copyPixCode() {
+            navigator.clipboard.writeText(pixCode).then(function() {
+                alert('Código PIX copiado!');
+            }, function(err) {
+                alert('Erro ao copiar: ' + err);
+            });
+        }
+    </script>
+</body>
+</html>
